@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMORA | Every memory has its unique scent</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0B0B0D',
+                        charcoal: '#1F1F22',
+                        champagne: '#D4AF37', /* Adjusted slightly for standard Champagne Gold contrast */
+                        ivory: '#F5F1E9',
+                    },
+                    fontFamily: {
+                        heading: ['Cinzel', 'serif'],
+                        body: ['Montserrat', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0B0D;
+            color: #F5F1E9;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Down Indicator Animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+        
+        .animate-bounce-slow {
+            animation: bounce 2.5s infinite;
+        }
+
+        /* Animated Soundwave */
+        .soundwave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 40px;
+        }
+
+        .bar {
+            width: 3px;
+            background-color: #D4AF37;
+            border-radius: 99px;
+            animation: sound 1.2s infinite ease-in-out alternate;
+        }
+
+        .bar:nth-child(1) { animation-delay: -1.0s; height: 10px; }
+        .bar:nth-child(2) { animation-delay: -0.8s; height: 25px; }
+        .bar:nth-child(3) { animation-delay: -0.6s; height: 40px; }
+        .bar:nth-child(4) { animation-delay: -0.4s; height: 15px; }
+        .bar:nth-child(5) { animation-delay: -0.2s; height: 30px; }
+        .bar:nth-child(6) { animation-delay: -0.5s; height: 20px; }
+        .bar:nth-child(7) { animation-delay: -0.9s; height: 12px; }
+
+        @keyframes sound {
+            0% { transform: scaleY(0.2); opacity: 0.5; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* Hide Scrollbar for Carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom selection color */
+        ::selection {
+            background: #D4AF37;
+            color: #0B0B0D;
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-champagne selection:text-midnight">
+
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-transparent py-6 px-6 md:px-12 border-b border-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex flex-col items-center group">
+                <!-- Stylized Geometric M -->
+                <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-champagne transition-transform duration-500 group-hover:scale-105">
+                    <path d="M2 30V4L20 20L38 4V30" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <path d="M20 28L24 24H16L20 28Z" fill="currentColor"/>
+                </svg>
+            </a>
+            
+            <nav class="hidden md:flex gap-10">
+                <a href="#collection" class="text-ivory text-xs uppercase tracking-[0.2em] hover:text-champagne transition-colors duration-300">Collection</a>
+                <a href="#philosophy" class="text-ivory text-xs uppercase tracking-[0.2em] hover:text-champagne transition-colors duration-300">The Story</a>
+            </nav>
+            
+            <div>
+                <a href="#order" class="border border-champagne text-champagne hover:bg-champagne hover:text-midnight text-xs uppercase tracking-[0.2em] px-6 py-2 transition-all duration-300">Order</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative h-screen w-full flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-midnight">
+        <!-- Subtle background texture overlay -->
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-[0.03] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight pointer-events-none"></div>
+
+        <div class="relative z-10 reveal">
+            <h1 class="font-heading text-5xl md:text-7xl lg:text-9xl text-champagne tracking-widest font-medium mb-6">MEMORA</h1>
+            <p class="font-body text-ivory text-sm md:text-base uppercase tracking-[0.3em] font-light">Every memory has its unique scent.</p>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center reveal animate-bounce-slow">
+            <span class="text-champagne/50 text-xs uppercase tracking-[0.2em] mb-4">Discover</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-champagne to-transparent"></div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-32 md:py-48 bg-charcoal px-6">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <h2 class="font-heading text-3xl md:text-5xl lg:text-6xl text-ivory leading-tight mb-12">
+                We don't sell gifts.<br>
+                <span class="italic text-champagne">We preserve memories.</span>
+            </h2>
+            <div class="w-16 h-[1px] bg-champagne mx-auto mb-12"></div>
+            <p class="font-body text-ivory/80 text-lg md:text-xl leading-relaxed font-light">
+                MEMORA is more than a product. It's a personal artifact — where fragrance meets memory, technology meets emotion, and your story becomes something you can hold.
+            </p>
+        </div>
+    </section>
+
+    <section id="collection" class="bg-midnight">
+        
+        <!-- Showcase Block 1: Signature Fragrance -->
+        <div class="flex flex-col md:flex-row min-h-screen">
+            <div class="w-full md:w-1/2 h-[60vh] md:h-auto relative reveal">
+                <!-- High-quality abstract dark luxury placeholder image -->
+                <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=1200&auto=format&fit=crop" alt="Signature Fragrance" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-luminosity">
+                <div class="absolute inset-0 bg-gradient-to-t from-midnight to-transparent md:bg-gradient-to-r md:from-transparent md:to-midnight opacity-90"></div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center px-8 py-20 md:p-24 reveal">
+                <h3 class="text-champagne text-xs uppercase tracking-[0.3em] mb-4">The Scent</h3>
+                <h2 class="font-heading text-4xl md:text-5xl text-ivory mb-6">Signature Fragrance</h2>
+                <p class="font-body text-ivory/70 text-base md:text-lg font-light leading-relaxed mb-10 max-w-lg">
+                    Encased in midnight black glass, our signature fragrance is a complex layering of dark woods, subtle spices, and a hint of timeless elegance. Designed to evoke nostalgia and create new, unforgettable associations.
+                </p>
+                <a href="#" class="inline-flex items-center text-champagne text-sm uppercase tracking-widest hover:text-ivory transition-colors duration-300 w-max group">
+                    Explore Scent 
+                    <span class="ml-4 w-12 h-[1px] bg-champagne group-hover:bg-ivory transition-colors duration-300"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex flex-col-reverse md:flex-row min-h-screen bg-charcoal">
+            <div class="w-full md:w-1/2 flex flex-col justify-center px-8 py-20 md:p-24 reveal">
+                <h3 class="text-champagne text-xs uppercase tracking-[0.3em] mb-4">The Artifact</h3>
+                <h2 class="font-heading text-4xl md:text-5xl text-ivory mb-6">The NFC Memory Card</h2>
+                <blockquote class="font-heading italic text-2xl text-champagne mb-6 border-l-2 border-champagne pl-6">
+                    "Your voice. Forever a part of me."
+                </blockquote>
+                <p class="font-body text-ivory/70 text-base md:text-lg font-light leading-relaxed mb-10 max-w-lg">
+                    Crafted from solid brushed metal, this engraved artifact holds more than its weight. Embedded with NFC technology, a simple tap brings your preserved voice, message, or memory instantly to life on your device.
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 h-[60vh] md:h-auto relative reveal">
+                <img src="https://images.unsplash.com/photo-1611117775350-ac3950990985?q=80&w=1200&auto=format&fit=crop" alt="Metal NFC Card" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-luminosity">
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent md:bg-gradient-to-l md:from-transparent md:to-charcoal opacity-90"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row min-h-screen">
+            <div class="w-full md:w-1/2 h-[60vh] md:h-auto relative reveal bg-midnight flex items-center justify-center border-r border-charcoal">
+                <!-- Phone mockup visual with soundwave -->
+                <div class="relative w-64 h-[500px] border border-charcoal rounded-[3rem] p-4 flex flex-col bg-[#111] shadow-2xl overflow-hidden before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-32 before:h-6 before:bg-midnight before:rounded-b-2xl z-10">
+                    <div class="flex-1 flex flex-col items-center justify-center px-4 text-center">
+                        <p class="text-champagne text-[10px] tracking-widest uppercase mb-12">MEMORA</p>
+                        
+                        <!-- Animated Soundwave CSS -->
+                        <div class="soundwave mb-12">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+
+                        <p class="font-heading italic text-lg text-ivory">A memory is playing...</p>
+                        <p class="font-body text-ivory/50 text-xs mt-4 font-light">Some words deserve to become something you can keep.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col justify-center px-8 py-20 md:p-24 reveal">
+                <h3 class="text-champagne text-xs uppercase tracking-[0.3em] mb-4">The Experience</h3>
+                <h2 class="font-heading text-4xl md:text-5xl text-ivory mb-6">Digital Ecosystem</h2>
+                <p class="font-body text-ivory/70 text-base md:text-lg font-light leading-relaxed mb-10 max-w-lg">
+                    The bridge between the physical and the digital. Our secure app allows you to record, upload, and curate the audio moments linked to your physical artifact. A seamless, private sanctuary for your most precious narratives.
+                </p>
+                <a href="#" class="inline-block border border-champagne text-champagne hover:bg-champagne hover:text-midnight text-xs uppercase tracking-[0.2em] px-8 py-4 transition-all duration-300 w-max">
+                    Discover the App
+                </a>
+            </div>
+        </div>
+
+        <!-- Showcase Block 4: Memory Balloon Light Gallery Carousel -->
+        <div class="py-24 md:py-32 bg-charcoal border-t border-charcoal/50">
+            <div class="max-w-7xl mx-auto px-6 reveal">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <h3 class="text-champagne text-xs uppercase tracking-[0.3em] mb-4">Illuminated Artifacts</h3>
+                    <h2 class="font-heading text-4xl md:text-5xl text-ivory mb-6">The Memory Light Series</h2>
+                    <p class="font-body text-ivory/70 text-base md:text-lg font-light leading-relaxed">
+                        Hand-blown glass sculptures designed as weightless floating balloons. Suspended moments of light, bringing warmth and timeless elegance to any sanctuary.
+                    </p>
+                </div>
+
+                <!-- Carousel Slider Gallery -->
+                <div class="relative max-w-6xl mx-auto">
+                    <div id="gallery-slider" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar py-4 px-2">
+                        
+                        <!-- Slide 1: Multi Ceiling Lamp Trio -->
+                        <div class="snap-center shrink-0 w-[85%] md:w-[48%] lg:w-[32%] h-[480px] relative rounded-xl overflow-hidden bg-midnight border border-charcoal/80 group">
+                            <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1000&auto=format&fit=crop" alt="Memory Balloon Ceiling Trio" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <span class="text-[10px] text-champagne uppercase tracking-[0.25em] block mb-1">Ceiling Installation</span>
+                                <h4 class="font-heading text-xl text-ivory">Triad Ceiling Balloon</h4>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Pale Yellow Pendant -->
+                        <div class="snap-center shrink-0 w-[85%] md:w-[48%] lg:w-[32%] h-[480px] relative rounded-xl overflow-hidden bg-midnight border border-charcoal/80 group">
+                            <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=1000&auto=format&fit=crop" alt="Single Yellow Balloon Light" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <span class="text-[10px] text-champagne uppercase tracking-[0.25em] block mb-1">Single Pendant</span>
+                                <h4 class="font-heading text-xl text-ivory">Solitary Amber Balloon</h4>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: Interior Wall Sconce -->
+                        <div class="snap-center shrink-0 w-[85%] md:w-[48%] lg:w-[32%] h-[480px] relative rounded-xl overflow-hidden bg-midnight border border-charcoal/80 group">
+                            <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=1000&auto=format&fit=crop" alt="Wall Mounted Memory Lights" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <span class="text-[10px] text-champagne uppercase tracking-[0.25em] block mb-1">Wall Sconce Duo</span>
+                                <h4 class="font-heading text-xl text-ivory">Earth & Ochre Sconce</h4>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: Sculptural Cluster -->
+                        <div class="snap-center shrink-0 w-[85%] md:w-[48%] lg:w-[32%] h-[480px] relative rounded-xl overflow-hidden bg-midnight border border-charcoal/80 group">
+                            <img src="https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?q=80&w=1000&auto=format&fit=crop" alt="Luminous Memory Ambient Lighting" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <span class="text-[10px] text-champagne uppercase tracking-[0.25em] block mb-1">Custom Composition</span>
+                                <h4 class="font-heading text-xl text-ivory">Constellation Cluster</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Carousel Controls & Indicator Dots Track -->
+                    <div class="flex items-center justify-between mt-10 max-w-2xl mx-auto px-4">
+                        <button id="slide-prev" aria-label="Previous image" class="text-champagne/60 hover:text-champagne p-3 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+                            </svg>
+                        </button>
+
+                        <!-- Dot Pagination Bar -->
+                        <div id="dots-container" class="flex items-center gap-1.5 overflow-x-auto max-w-xs px-2 no-scrollbar">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <button id="slide-next" aria-label="Next image" class="text-champagne/60 hover:text-champagne p-3 transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="bg-midnight border-t border-charcoal pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col items-center reveal">
+            <!-- M Logo -->
+            <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-champagne mb-8">
+                <path d="M2 30V4L20 20L38 4V30" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+                <path d="M20 28L24 24H16L20 28Z" fill="currentColor"/>
+            </svg>
+            <h2 class="font-heading text-2xl tracking-widest text-ivory mb-2">MEMORA</h2>
+            <p class="text-champagne text-[10px] tracking-[0.3em] uppercase mb-12">A memory, made tangible.</p>
+            
+            <div class="flex gap-8 mb-16">
+                <a href="#" class="text-ivory/50 hover:text-champagne text-sm transition-colors duration-300">Instagram</a>
+                <a href="#" class="text-ivory/50 hover:text-champagne text-sm transition-colors duration-300">Contact</a>
+                <a href="#" class="text-ivory/50 hover:text-champagne text-sm transition-colors duration-300">Journal</a>
+            </div>
+
+            <div class="w-full border-t border-charcoal pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-ivory/30 text-xs font-light tracking-wide">
+                <p>&copy; 2026 MEMORA. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-ivory transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-ivory transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Intersection Observer & Carousel Navigation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-midnight/90', 'backdrop-blur-md', 'border-charcoal', 'py-4');
+                    navbar.classList.remove('bg-transparent', 'border-transparent', 'py-6');
+                } else {
+                    navbar.classList.remove('bg-midnight/90', 'backdrop-blur-md', 'border-charcoal', 'py-4');
+                    navbar.classList.add('bg-transparent', 'border-transparent', 'py-6');
+                }
+            });
+
+            // Reveal Animation Observer
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+            
+            // Trigger initial check for elements already in view on load
+            setTimeout(() => {
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 100);
+
+            // Carousel Navigation Logic
+            const slider = document.getElementById('gallery-slider');
+            const prevBtn = document.getElementById('slide-prev');
+            const nextBtn = document.getElementById('slide-next');
+            const dotsContainer = document.getElementById('dots-container');
+
+            if (slider && prevBtn && nextBtn && dotsContainer) {
+                const slides = slider.children;
+                const totalDots = 35; // Fine-grained dot indicator bar matching screenshot
+
+                for (let i = 0; i < totalDots; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = `w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 ${
+                        i === 0 ? 'bg-champagne scale-125' : 'bg-ivory/20'
+                    }`;
+                    dotsContainer.appendChild(dot);
+                }
+
+                const dots = dotsContainer.children;
+
+                const updateActiveDot = () => {
+                    const maxScroll = slider.scrollWidth - slider.clientWidth;
+                    if (maxScroll <= 0) return;
+                    const scrollRatio = slider.scrollLeft / maxScroll;
+                    const activeIndex = Math.min(
+                        Math.floor(scrollRatio * totalDots),
+                        totalDots - 1
+                    );
+
+                    Array.from(dots).forEach((dot, idx) => {
+                        if (idx === activeIndex) {
+                            dot.className = 'w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 bg-champagne scale-125';
+                        } else {
+                            dot.className = 'w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 bg-ivory/20';
+                        }
+                    });
+                };
+
+                slider.addEventListener('scroll', updateActiveDot);
+
+                prevBtn.addEventListener('click', () => {
+                    slider.scrollBy({ left: -slider.clientWidth * 0.7, behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    slider.scrollBy({ left: slider.clientWidth * 0.7, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
